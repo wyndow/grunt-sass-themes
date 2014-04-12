@@ -25,7 +25,7 @@ module.exports = function (grunt) {
           output: 'tmp',
           themes: ['black', 'white'],
           themeDir: 'test/fixtures/themes',
-          themeImport: 'test/fixtures/theme.scss'
+          themeImport: 'test/fixtures/_theme.scss'
         },
         files: {
           'simple_{{themeName}}.css': ['test/fixtures/simple.scss']
@@ -45,5 +45,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('test', ['clean', 'sassThemes', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'jshint', 'nodeunit']);
 };

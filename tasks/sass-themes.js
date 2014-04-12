@@ -11,6 +11,17 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+
+  var path = require('path'),
+      sass = require('node-sass'),
+      fs = require('fs');
+
+  var _ = grunt.util._,
+      async = grunt.util.async;
+
+  grunt.registerMultiTask('sassThemes', 'Compile multiple themed SASS files to CSS', function () {
+
+  });
 
 };

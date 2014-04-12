@@ -6,6 +6,8 @@ String.prototype.removeWhitespace = function () {
 
 exports.sassThemes = {
   main: function (test) {
+    test.ok(true, 'one test is valid');
+
     test.done();
   }
 };

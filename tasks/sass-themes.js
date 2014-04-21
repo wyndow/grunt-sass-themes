@@ -11,17 +11,129 @@
 
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   var path = require('path'),
-      sass = require('node-sass'),
-      fs = require('fs');
+    sass = require('node-sass'),
+    fs = require('fs');
 
   var _ = grunt.util._,
-      async = grunt.util.async;
+    async = grunt.util.async;
 
-  grunt.registerMultiTask('sassThemes', 'Compile multiple themed SASS files to CSS', function () {
+  var sassOptions = {
+    render: ['file', 'success', 'error', 'includePaths', 'imagePath', 'outputStyle', 'sourceComments']
+  };
+
+  grunt.registerMultiTask('sassThemes', 'Compile multiple themed SASS files to CSS', function() {
+    var options = {
+      root: './',
+      output: 'generated',
+      themeDir: 'themes',
+      placeholder: '{{themeName}}',
+      themeImport: 'theme'
+    };
+
+    var done = this.async();
+
+    options = _.extend(options, this.options());
+    var srcFiles = this.files;
+
+    async.forEachSeries(options.themes, function(theme, nextTheme) {
+      var themePath = options.root + '/' + options.themeDir + '/' + theme + '.scss';
+      console.log(themePath);
+
+      var rs = fs.createReadStream(themePath);
+      rs.pipe(fs.createWriteStream(options.themeImport));
+
+      rs.on('end', function() {
+
+        async.forEachSeries(srcFiles, function(f, nextFileObj) {
+          var destFile = options.output + '/' + f.dest.replace(options.placeholder, theme);
+
+          var files = f.src.filter(function(filepath) {
+            // Warn on and remove invalid source files (if nonull was set).
+            if (!grunt.file.exists(filepath)) {
+              grunt.log.warn('Source file "' + filepath + '" not found.');
+              return false;
+            } else {
+              return true;
+            }
+          });
+
+          if (files.length === 0) {
+            if (f.src.length < 1) {
+              grunt.log.warn('Destination not written because no source files were found.');
+            }
+
+            // No src files, goto next target. Warn would have been issued above.
+            return nextFileObj();
+          }
+
+          var compiled = [];
+
+          async.concatSeries(files, function(file, next) {
+            compileSass(file, options, function(err, css) {
+              if (!err) {
+                compiled.push(css);
+                next();
+              } else {
+                nextFileObj(err);
+              }
+            });
+          }, function() {
+            if (compiled.length < 1) {
+              grunt.log.warn('Destination not written because compiled files were empty.');
+            } else {
+              grunt.file.write(destFile, compiled.join(grunt.util.normalizelf(grunt.util.linefeed)));
+              grunt.log.writeln('File ' + destFile.cyan + ' created.');
+            }
+            nextFileObj();
+          });
+        }, nextTheme);
+      });
+
+    }, done);
 
   });
+
+  var compileSass = function(srcFile, options, callback) {
+    options = _.extend({
+      file: srcFile
+    }, options);
+    options.includePaths = options.includePaths || [path.dirname(srcFile)];
+
+    var css;
+    var srcCode = grunt.file.read(srcFile);
+
+    var renderOpts = {
+      file: options.file,
+      success: function(css) {
+        callback(null, css);
+      },
+      error: function(err) {
+        sassError(err);
+        callback(true, css);
+      },
+      includePaths: options.includePaths,
+      imagePath: options.imagePath,
+      outputStyle: options.outputStyle,
+      sourceComments: options.sourceComments
+    };
+
+    sass.render(_.pick(renderOpts, sassOptions.render));
+
+  };
+
+  var formatSassError = function(e) {
+    var pos = '[' + 'SASS' + e.line + ':' + ('CSS' + e.column) + ']';
+    return e.filename + ': ' + pos + ' ' + e.message;
+  };
+
+  var sassError = function(e) {
+    var message = sass.formatError ? sass.formatError(e) : formatSassError(e);
+
+    grunt.log.error(message);
+    grunt.fail.warn('Error compiling SASS.');
+  };
 
 };

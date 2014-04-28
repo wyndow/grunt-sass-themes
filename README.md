@@ -5,7 +5,6 @@
 [![NPM version](https://badge.fury.io/js/grunt-sass-themes.svg)](http://badge.fury.io/js/grunt-sass-themes)
 [![Dependency Status](https://david-dm.org/acolchado/grunt-sass-themes.png?theme=shields.io)](https://david-dm.org/acolchado/grunt-sass-themes)
 [![devDependency Status](https://david-dm.org/acolchado/grunt-sass-themes.png?theme=shields.io)](https://david-dm.org/acolchado/grunt-sass-themes#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/acolchado/grunt-sass-themes/badge.png)](https://coveralls.io/r/acolchado/grunt-sass-themes)
 
 Compile theme-able SASS files to CSS.
 

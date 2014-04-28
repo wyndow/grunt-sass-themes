@@ -70,7 +70,7 @@ sassThemes: {
             output: 'path/to/output'
         },
         files: {
-            'example_{{themeName}}.css': 'simple.sass'
+            'example_{{themeName}}.css': 'simple.scss'
         }
     }
 }
@@ -86,9 +86,9 @@ sassThemes: {
             themeDir: 'path/to/themes'
         },
         files: {
-            'core_{{themeName}}.css': ['core/*.sass'],
-            'common_{{themeName}}.css': ['common/*.sass'],
-            'components_{{themeName}}.css': ['components/*.sass']
+            'core_{{themeName}}.css': ['core/*.scss'],
+            'common_{{themeName}}.css': ['common/*.scss'],
+            'components_{{themeName}}.css': ['components/*.scss']
         }
     }
 }

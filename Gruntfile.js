@@ -3,40 +3,39 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
-    clean: {
-      tmp: 'tmp'
+    "clean": {
+      "tmp": 'tmp'
     },
 
-    jshint: {
-      all: [
+    "jshint": {
+      "all": [
         'Gruntfile.js',
         'tasks/*.js',
         '<%= nodeunit.tests %>'
       ],
 
-      options: {
-        jshintrc: '.jshintrc'
+      "options": {
+        "jshintrc": '.jshintrc'
       }
     },
 
-    sassThemes: {
-      main: {
-        options: {
-          output: 'tmp',
-          themes: ['black', 'white'],
-          themeDir: 'test/fixtures/themes',
-          themeImport: 'test/fixtures/_theme.scss',
-          outputStyle: 'compact'
-
+    "sassThemes": {
+      "main": {
+        "options": {
+          "output": 'tmp',
+          "themes": ['black', 'white'],
+          "themeDir": 'test/fixtures/themes',
+          "themeImport": 'test/fixtures/_theme.scss',
+          "outputStyle": 'compact'
         },
-        files: {
-          'simple_{{themeName}}.css': ['test/fixtures/simple.scss']
+        "files": {
+          "simple_{{themeName}}.css": ['test/fixtures/simple.scss']
         }
       }
     },
 
-    nodeunit: {
-      tests: ['test/*_test.js']
+    "nodeunit": {
+      "tests": ['test/*_test.js']
     }
 
   });

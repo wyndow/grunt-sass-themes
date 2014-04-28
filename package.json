@@ -6,7 +6,7 @@
     "email": "agustin@colchado.com"
   },
   "description": "Compile multiple themed SASS files to CSS.",
-  "version": "0.0.2",
+  "version": "0.0.2.1",
   "homepage": "https://github.com/acolchado/grunt-sass-themes",
   "repository": {
     "type": "git",

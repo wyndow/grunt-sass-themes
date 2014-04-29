@@ -5,19 +5,37 @@ String.prototype.removeWhitespace = function() {
 };
 
 exports.sassThemes = {
-  main: function(test) {
-    test.expect(4);
+  with_underscores: function(test) {
+    test.expect(8);
 
-    test.ok(grunt.file.exists('tmp/simple_black.css'), 'simple black exists');
-    test.ok(grunt.file.exists('tmp/simple_white.css'), 'simple white exists');
+    var actualBlack, expectedBlack,
+        actualWhite,expectedWhite;
 
-    var actualBlack = grunt.file.read('tmp/simple_black.css').removeWhitespace();
-    var expectedBlack = grunt.file.read('test/expected/simple_black.css').removeWhitespace();
-    test.equals(actualBlack, expectedBlack, 'simple black is as expected');
+    // Tests for files with underscores
+    // ******************************************
+    test.ok(grunt.file.exists('tmp/simple_with_underscores_black.css'), 'simple black with underscores exists');
+    test.ok(grunt.file.exists('tmp/simple_with_underscores_white.css'), 'simple white with underscores exists');
 
-    var actualWhite = grunt.file.read('tmp/simple_white.css').removeWhitespace();
-    var expectedWhite = grunt.file.read('test/expected/simple_white.css').removeWhitespace();
-    test.equals(actualWhite, expectedWhite, 'simple white is as expected');
+    actualBlack = grunt.file.read('tmp/simple_with_underscores_black.css').removeWhitespace();
+    expectedBlack = grunt.file.read('test/expected/simple_black.css').removeWhitespace();
+    test.equals(actualBlack, expectedBlack, 'simple black with underscores is as expected');
+
+    actualWhite = grunt.file.read('tmp/simple_with_underscores_white.css').removeWhitespace();
+    expectedWhite = grunt.file.read('test/expected/simple_white.css').removeWhitespace();
+    test.equals(actualWhite, expectedWhite, 'simple white with underscores  is as expected');
+
+    // Tests for files without underscores
+    // ******************************************
+    test.ok(grunt.file.exists('tmp/simple_without_underscores_black.css'), 'simple black without underscores exists');
+    test.ok(grunt.file.exists('tmp/simple_without_underscores_white.css'), 'simple white without underscores exists');
+
+    actualBlack = grunt.file.read('tmp/simple_without_underscores_black.css').removeWhitespace();
+    expectedBlack = grunt.file.read('test/expected/simple_black.css').removeWhitespace();
+    test.equals(actualBlack, expectedBlack, 'simple black without underscores is as expected');
+
+    actualWhite = grunt.file.read('tmp/simple_without_underscores_white.css').removeWhitespace();
+    expectedWhite = grunt.file.read('test/expected/simple_white.css').removeWhitespace();
+    test.equals(actualWhite, expectedWhite, 'simple white without underscores  is as expected');
 
     test.done();
   }

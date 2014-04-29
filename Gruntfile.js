@@ -20,16 +20,30 @@ module.exports = function (grunt) {
     },
 
     "sassThemes": {
-      "main": {
+      "with_underscores": {
         "options": {
           "output": 'tmp',
+          "themeFilesStartWithUnderscore": true,
           "themes": ['black', 'white'],
-          "themeDir": 'test/fixtures/themes',
+          "themeDir": 'test/fixtures/themes-with-underscore',
           "themeImport": 'test/fixtures/_theme.scss',
           "outputStyle": 'compact'
         },
         "files": {
-          "simple_{{themeName}}.css": ['test/fixtures/simple.scss']
+          "simple_with_underscores_{{themeName}}.css": ['test/fixtures/simple.scss']
+        }
+      },
+      "without_underscores": {
+        "options": {
+          "output": 'tmp',
+          "themeFilesStartWithUnderscore": false,
+          "themes": ['black', 'white'],
+          "themeDir": 'test/fixtures/themes-without-underscore',
+          "themeImport": 'test/fixtures/_theme.scss',
+          "outputStyle": 'compact'
+        },
+        "files": {
+          "simple_without_underscores_{{themeName}}.css": ['test/fixtures/simple.scss']
         }
       }
     },

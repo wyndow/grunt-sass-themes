@@ -29,6 +29,8 @@ module.exports = function(grunt) {
       root: './',
       output: 'generated',
       themeDir: 'themes',
+      themeFilesStartWithUnderscore: true,
+      sassExtension: 'scss',
       placeholder: '{{themeName}}',
       themeImport: 'theme'
     };
@@ -39,8 +41,7 @@ module.exports = function(grunt) {
     var srcFiles = this.files;
 
     async.forEachSeries(options.themes, function(theme, nextTheme) {
-      var themePath = options.root + '/' + options.themeDir + '/' + theme + '.scss';
-      console.log(themePath);
+      var themePath = getThemePath(options, theme);
 
       var rs = fs.createReadStream(themePath);
       rs.pipe(fs.createWriteStream(options.themeImport));
@@ -95,6 +96,13 @@ module.exports = function(grunt) {
     }, done);
 
   });
+
+  var getThemePath = function(options, theme) {
+    var themeFileImport = options.themeFilesStartWithUnderscore ? "_" + theme : theme;
+    themeFileImport += '.' + options.sassExtension;
+
+    return path.join(options.root, options.themeDir, themeFileImport );
+  };
 
   var compileSass = function(srcFile, options, callback) {
     options = _.extend({

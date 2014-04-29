@@ -41,9 +41,13 @@ module.exports = function(grunt) {
     var srcFiles = this.files;
 
     async.forEachSeries(options.themes, function(theme, nextTheme) {
+
+      console.log('Processing theme: ' + theme);
+
       var themePath = getThemePath(options, theme);
 
       var rs = fs.createReadStream(themePath);
+
       rs.pipe(fs.createWriteStream(options.themeImport));
 
       rs.on('end', function() {

@@ -1,12 +1,14 @@
 # grunt-sass-themes
 =======================
 
-[![Build Status](https://travis-ci.org/acolchado/grunt-sass-themes.svg?branch=master)](https://travis-ci.org/acolchado/grunt-sass-themes)
-[![NPM version](https://badge.fury.io/js/grunt-sass-themes.svg)](http://badge.fury.io/js/grunt-sass-themes)
-[![Dependency Status](https://david-dm.org/acolchado/grunt-sass-themes.png?theme=shields.io)](https://david-dm.org/acolchado/grunt-sass-themes)
-[![devDependency Status](https://david-dm.org/acolchado/grunt-sass-themes.png?theme=shields.io)](https://david-dm.org/acolchado/grunt-sass-themes#info=devDependencies)
+> Compile theme-able SASS files to CSS. Use the same SASS files and only override variables for different themes.
 
-Compile theme-able SASS files to CSS.
+[![Build Status](https://travis-ci.org/opentable/grunt-sass-themes.svg?branch=master)](https://travis-ci.org/opentable/grunt-sass-themes)
+[![NPM version](https://badge.fury.io/js/grunt-sass-themes.svg)](http://badge.fury.io/js/grunt-sass-themes)
+[![Dependency Status](https://david-dm.org/opentable/grunt-sass-themes.png?theme=shields.io)](https://david-dm.org/opentable/grunt-sass-themes)
+[![devDependency Status](https://david-dm.org/opentable/grunt-sass-themes.png?theme=shields.io)](https://david-dm.org/opentable/grunt-sass-themes#info=devDependencies)
+
+[![NPM](https://nodei.co/npm/grunt-sass-themes.png)](https://nodei.co/npm/grunt-sass-themes)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`

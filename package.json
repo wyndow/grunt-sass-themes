@@ -1,6 +1,6 @@
 {
   "name": "grunt-sass-themes",
-  "author": "opentable",
+  "author": "OpenTable Inc.",
   "description": "Compile multiple themed SASS files to CSS.",
   "version": "0.0.6",
   "homepage": "https://github.com/opentable/grunt-sass-themes",

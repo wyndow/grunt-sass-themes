@@ -10,6 +10,8 @@
 
 [![NPM](https://nodei.co/npm/grunt-sass-themes.png)](https://nodei.co/npm/grunt-sass-themes)
 
+**Based on the brilliance of [grunt-less-themes](https://github.com/hollandben/grunt-less-themes)**
+
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
 

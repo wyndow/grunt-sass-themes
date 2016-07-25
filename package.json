@@ -41,7 +41,7 @@
     "compile"
   ],
   "dependencies": {
-    "node-sass": ">=0.8.4"
+    "node-sass": "^3.7.0"
   },
   "devDependencies": {
     "grunt": "0.4.4",

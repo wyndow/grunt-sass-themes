@@ -119,20 +119,21 @@ module.exports = function(grunt) {
 
     var renderOpts = {
       file: options.file,
-      success: function(css) {
-        callback(null, css);
-      },
-      error: function(err) {
-        sassError(err);
-        callback(true, css);
-      },
       includePaths: options.includePaths,
       imagePath: options.imagePath,
       outputStyle: options.outputStyle,
       sourceComments: options.sourceComments
     };
 
-    sass.render(_.pick(renderOpts, sassOptions.render));
+    sass.render(_.pick(renderOpts, sassOptions.render), function(err, res) {
+      if (err) {
+        sassError(err);
+        callback(true, res.css);
+        return;
+      }
+
+      callback(null, res.css);
+    });
 
   };
 
